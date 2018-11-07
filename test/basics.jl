@@ -1,7 +1,7 @@
 module X
 
 using OpenDSSDirect
-using Base.Test
+using Test
 
 
 filename = string("$(dirname(@__FILE__))/../examples/8500-Node/Master.dss")
@@ -24,7 +24,7 @@ end # module
 module Y
 
 using OpenDSSDirect.DSS
-using Base.Test
+using Test
 
 filename = string("$(dirname(@__FILE__))/../examples/8500-Node/Master.dss")
 
@@ -47,13 +47,13 @@ end
 linelosssum = 0.0im
 linenumber = Lines.First()
 n = Lines.Count()
-linelosses = zeros(Complex128, n)
+linelosses = zeros(ComplexF64, n)
 for i in 1:n
     linelosssum += CktElement.Losses()[1]
     linelosses[i] = CktElement.Losses()[1]
     linenumber = Lines.Next()
 end
-@test_approx_eq_eps linelosssum.re Circuit.LineLosses().re * 1000  50
+@test linelosssum.re ≈ (Circuit.LineLosses().re * 1000)  atol=50
 
 @test Solution.Mode() == 0
 
