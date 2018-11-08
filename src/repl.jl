@@ -1,5 +1,5 @@
 import REPL
-import Base: LineEdit
+import REPL: LineEdit
 
 ## This code was adapted from the following:
 ##    https://github.com/Keno/Gallium.jl/blob/1ef7111880495f3c5a7989d88a5fbc60e7eeb285/src/lldbrepl.jl
